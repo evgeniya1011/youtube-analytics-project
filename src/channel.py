@@ -20,6 +20,31 @@ class Channel:
         self.video_count = channel_info["items"][0]["statistics"]["videoCount"]
         self.view_count = channel_info["items"][0]["statistics"]["viewCount"]
 
+    def __str__(self):
+        return f"{self.title} {self.url}"
+
+    def __add__(self, other):
+        return self.subs_count + other.subs_count
+
+    def __sub__(self, other):
+        return self.subs_count - other.subs_count
+
+    def __lt__(self, other):
+        if self.subs_count < other.subs_count:
+            return True
+
+    def __le__(self, other):
+        if self.subs_count <= other.subs_count:
+            return True
+
+    def __gt__(self, other):
+        if self.subs_count > other.subs_count:
+            return False
+
+    def __ge__(self, other):
+        if self.subs_count >= other.subs_count:
+            return False
+
     def print_info(self) -> None:
         """Выводит в консоль информацию о канале."""
         api_key: str = os.getenv('API_KEY_Y')
